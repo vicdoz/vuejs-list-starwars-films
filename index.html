@@ -1,21 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Intro a VueJS</title>
+    <meta charset="UTF-8">
+  <title>Star Wars Movies</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/superhero/bootstrap.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="app">
   <h1>{{ greeting }}</h1>
   <input type="text" v-model="greeting">
+   <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <ul class="list-group">
+        <li v-for="film in films | orderBy 'id'"
+    class="list-group-item film"
+    v-bind:class="{'seen' : film.seen}"
+>
+    <button class="btn btn-primary btn-xs pull-left"
+            v-on:click="toggleSeen(film)"  @mouseover="toggleSeen(film)"
+    >
+            Seen/ Not seen
+    </button>
+    <span>{{* film.name }}</span>
+</li>
+      </ul>
+    </div>
+  </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.2/vue-resource.min.js"></script>
+
 <script>
   new Vue({
     el: '#app',
     data: {
-      greeting: 'Hi John Doe'
+      greeting: 'Hi John Doe',
+       films: [
+   ]
+    },
+     created: function () {
+      this.$http.get('https://swapi.co/api/films/')
+                .then(function (response) {
+                  this.films = response.data.results.map(function (film) {
+                    return {
+                      id: film.episode_id,
+                      name: film.title,
+                      seen: false
+                    }
+                  })
+                }.bind(this))
+    },
+  methods: {
+    toggleSeen: function (film) {
+      film.seen = !film.seen
     }
+  }
   })
 </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.js"></script>
