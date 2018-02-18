@@ -1,16 +1,27 @@
 {
-  "name": "list-things",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "vuejs-mini-curso",
+  "version": "0.1.0",
+  "description": "Un curso express de VueJS",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "live-server ."
-
+    "server": "live-server .",
+    "bundle": "browserify scripts/main.js -o bundle.js -t vueify --debug"
   },
+  "private": true,
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "live-server": "^1.2.0"
-  }
+    "babel-core": "^6.9.1",
+    "babel-plugin-transform-runtime": "^6.9.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-runtime": "^6.9.2",
+    "babelify": "^8.0.0",
+    "browserify": "^13.0.1",
+    "live-server": "^1.2.0",
+    "stringify": "^5.1.0",
+    "vue": "^1.0.28",
+    "vue-hot-reload-api": "^2.2.4",
+    "vue-resource": "^0.7.4",
+    "vueify": "^8.7.0"
+  },
+  "dependencies": {}
 }
